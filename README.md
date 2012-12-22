@@ -23,4 +23,10 @@ Now, using mkdo:
 	 $ # yay!
 
 
+TODO
+----
 
+ - Parsing of date formats, e.g. mv x.log old-[yyyymmdd]/
+ - Attempt to fix piping for Windows
+ - Testing on OSX
+ - man page, more extensive docs
