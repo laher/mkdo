@@ -9,10 +9,9 @@ import (
    "io"
    "syscall"
    "fmt"
-//   "github.com/kr/pty"
 )
 
-const MKDO_VERSION="0.0.2"
+const VERSION="0.0.3"
 
 var (
    flagSet = flag.NewFlagSet("mkdo", flag.ExitOnError)
@@ -82,24 +81,7 @@ func slashy(arg string) bool {
    }
    return false
 }
-/*
-func redirectIOPty(cmd *exec.Cmd) (*os.File, error) {
-      pty, tty, err := pty.Open()
-      if err != nil {
-         log.Println(err)
-         return pty, err
-      }
-      cmd.Stdout = tty
-      cmd.Stdin = tty
-      cmd.Stderr = tty
-      cmd.SysProcAttr = &syscall.SysProcAttr{Setctty: true, Setsid: true}
-      go io.Copy(os.Stdout, pty)
-      go io.Copy(os.Stderr, pty)
-      //go io.Copy(pty, os.Stdin)
-      cmd.Stdin= pty
-      return pty, err
-}
-*/
+
 func redirectIOStandard(cmd *exec.Cmd) (*os.File, error) {
    stdout, err := cmd.StdoutPipe()
    if err != nil {
@@ -131,11 +113,7 @@ func run(args []string) (int,error) {
    if true {
       cmd := exec.Command(args[0])
       cmd.Args= args
-//      cmd.Env= os.Environ()
-//      cmd.Env= append(cmd.Env,"TERM=xterm")
       if verbose { log.Printf("Running cmd: %s", args) }
-      //if verbose { log.Printf("args: %s ... a2: %s", args[1:]a, cmd.Args) }
-
 
       f, err:= redirectIO(cmd)
       if err != nil {
@@ -163,7 +141,7 @@ func run(args []string) (int,error) {
             processState, ok2 := e2.Sys().(syscall.WaitStatus)
             if ok2 {
                errcode := processState.ExitStatus()
-                          //TODO: Check on windows. Google groups suggests Windows uses processState.ExitCode instead, but it's not in the docs...
+               //TODO: Check on windows. Google groups suggests Windows uses processState.ExitCode instead, but it's not in the docs...
                log.Printf("%s returned exit status: %d", cmd.Args[0] , errcode)
                return errcode, err
             }
@@ -176,7 +154,7 @@ func run(args []string) (int,error) {
 
 func help_text() {
    fmt.Fprint(os.Stderr,"`mkdo` [options] <cmd> <paths"+string(os.PathSeparator)+"with"+string(os.PathSeparator)+"slashes"+string(os.PathSeparator)+">\n")
-   fmt.Fprintf(os.Stderr," Version %s. Options:\n", MKDO_VERSION)
+   fmt.Fprintf(os.Stderr," Version %s. Options:\n", VERSION)
    flagSet.PrintDefaults()
    fmt.Fprint(os.Stderr,"\nTip 1: mkdo recognises folders by the last trailing"+string(os.PathSeparator)+"slash"+string(os.PathSeparator)+" in an argument.\n")
    // NO longer needed!
@@ -184,7 +162,7 @@ func help_text() {
 }
 
 func version_text() {
-   fmt.Fprintf(os.Stderr," mkdo version %s\n", MKDO_VERSION)
+   fmt.Fprintf(os.Stderr," mkdo version %s\n", VERSION)
 }
 
 func Mkdo(call []string) (int,error) {

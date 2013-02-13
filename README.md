@@ -1,32 +1,45 @@
+---
+layout: default
+title: mkdo
+posts: 5
+---
+
 mkdo
 ====
-mkdo - create appropriate directories before running a command.
+mkdo - create appropriate directories then run a given command.
 
 Synopsis
 --------
 
-Imagine this scenario, without mkdo:
+Much like 'sudo', mkdo is prepended to an existing command to make it work better.
 
-	 $ mv error.log old/2012-01-01/
-	 mv: cannot move `error.log' to `old/2012-01-01/': Not a directory
-	 $ # D'Oh!
-	 $ mkdir old/2012-01-01
-	 mkdir: cannot create directory `old/2012-01-01': No such file or directory
-	 $ # D'Oh!
-	 $ mkdir -p old/2012-01-01
-	 $ mv error.log old/2012-01-01/
-	 $ # phew
+mkdo can be prepended to an existing command to create directories mentioned in the command.
 
-Now, using mkdo:
+e.g.
 
- 	 $ mkdo mv error.log old/2012-01-01/
-	 $ # yay!
+         mkdo mv error.log logs/old/2013-01-01/
 
+This would create the directory "logs/old/2013-01-01/" before running the 'mv' command.
 
-TODO
-----
+Note that mkdo uses trailing slashes (or backslashes in Windows) to identify folder names.
+
+Downloads
+---------
+[Latest binaries](http://laher.github.com/mkdo/downloads.html) for Linux, Mac, Windows.
+
+Lame joke
+---------
+With apologies, this lame rip-off of the [xkcd sudo joke](http://xkcd.com/149/) might help explain the purpose of this tool.
+
+ - me: put a cake in my lunchbox/
+ - partner: What? You haven't got a lunchbox/
+ - me: *mkdo* put a cake in my lunchbox/
+ - partner: okay
+
+To do
+-----
 
  - Parsing of date formats, e.g. mv x.log old-[yyyymmdd]/
  - Attempt to fix piping for Windows
  - Testing on OSX
- - man page, more extensive docs
+ - more extensive docs
