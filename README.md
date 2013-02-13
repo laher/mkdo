@@ -1,9 +1,3 @@
----
-layout: default
-title: mkdo
-posts: 5
----
-
 mkdo
 ====
 mkdo - create appropriate directories then run a given command.
