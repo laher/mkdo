@@ -30,7 +30,7 @@ Downloads
 ---------
 If you're already running go, then please just go get:
 
-      go get github.com/laher/goxc
+      go get github.com/laher/mkdo
 
 Otherwise, download [latest binaries](http://laher.github.com/mkdo/dl/latest/) for Linux, Mac, Windows.
 
