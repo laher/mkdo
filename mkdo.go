@@ -1,5 +1,4 @@
 package main
-
 /*
    Copyright 2013 Am Laher
 
@@ -27,7 +26,7 @@ import (
 	"syscall"
 )
 
-const VERSION = "0.0.4"
+const PKG_VERSION = "0.0.5"
 
 var (
 	flagSet     = flag.NewFlagSet("mkdo", flag.ExitOnError)
@@ -192,13 +191,13 @@ func run(args []string) (int, error) {
 
 func printHelp() {
 	fmt.Fprint(os.Stderr, "`mkdo` [options] <cmd> <paths"+string(os.PathSeparator)+"with"+string(os.PathSeparator)+"slashes"+string(os.PathSeparator)+">\n")
-	fmt.Fprintf(os.Stderr, " Version %s. Options:\n", VERSION)
+	fmt.Fprintf(os.Stderr, " Version %s. Options:\n", PKG_VERSION)
 	flagSet.PrintDefaults()
 	fmt.Fprint(os.Stderr, "\nTip 1: mkdo recognises folders by the last trailing"+string(os.PathSeparator)+"slash"+string(os.PathSeparator)+" in an argument.\n")
 }
 
 func printVersion() {
-	fmt.Fprintf(os.Stderr, " mkdo version %s\n", VERSION)
+	fmt.Fprintf(os.Stderr, " mkdo version %s\n", PKG_VERSION)
 }
 
 func Mkdo(call []string) (int, error) {
