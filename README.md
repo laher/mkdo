@@ -6,13 +6,17 @@ mkdo
 Synopsis
 --------
 
+Mkdo is a simple tool for people who forget to make directories. I do this all the time.
+
 Much like 'sudo', mkdo is prepended to an existing command to make it work better.
 
 mkdo creates any directories mentioned in the command (if they don't already exist).
 
 *Note that mkdo uses trailing slashes (or backslashes in Windows) to identify folder names.*
 
-e.g.
+I have 2 use cases in mind:
+
+e.g. 1
 
          mkdo mv error.log old/2013-01-01/
 
