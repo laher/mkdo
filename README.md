@@ -25,9 +25,9 @@ This would create the directories "old/2013-01-01/" before running the 'mv' comm
 
 e.g. 2
 
-         mkdo notepad newdir/newfile.txt
+         mkdo gvim newdir/newfile.txt
 
-This would create the directory 'newdir' before starting up notepad. In Linux this even works for console-based editors like vim, but note that in Windows the piping doesn't quite work properly.
+This would create the directory 'newdir' before starting up gvim. In Linux this even works for console-based editors like vim, but note that in Windows the piping doesn't quite work properly.
 
 
 Downloads
