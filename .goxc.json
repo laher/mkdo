@@ -1,24 +1,9 @@
 {
 	"Settings": {
 		"ArtifactsDest": "../mkdo-pages/dl",
-		"ArtifactTypes": [
-			"zip"
-		],
-		"Codesign": "",
-		"Tasks": [
-			"xc"
-		],
-		"Arch": "386",
-		"Os": "darwin",
 		"Resources": {
-			"Include": "INSTALL*,README*,LICENSE*",
-			"Exclude": "*.go"
 		},
-		"PackageVersion": "0.0.6",
-		"BranchName": "",
-		"PrereleaseInfo": "",
-		"BuildName": "",
-		"Verbosity": ""
+		"PackageVersion": "0.0.6"
 	},
-	"FormatVersion": "0.2.0"
+	"FormatVersion": "0.5.0"
 }
