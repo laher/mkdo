@@ -1,9 +1,16 @@
 {
-	"Settings": {
-		"ArtifactsDest": "../mkdo-pages/dl",
-		"Resources": {
+	"ArtifactsDest": "../mkdo-pages/dl",
+	"PackageVersion": "0.0.7",
+	"FormatVersion": "0.6",
+	"TaskSettings": {
+		"downloads-page": {
+			"fileheader": "---\nlayout: default\ntitle: Download mkdo\n---\n\nNote: Go users can use 'go get -u github.com/laher/mkdo' instead of these binaries."
 		},
-		"PackageVersion": "0.0.6"
-	},
-	"FormatVersion": "0.5.0"
+		"bintray": {
+			"subject": "laher",
+			"repository": "utils",
+			"package": "mkdo",
+			"downloadspage": "bintray.md"
+		}
+	}
 }

@@ -6,9 +6,9 @@ mkdo
 Synopsis
 --------
 
-Mkdo is a simple tool for people who forget to make directories. I do this all the time.
+Mkdo is a simple tool for people who only remember to make directories once they already need them.
 
-Much like 'sudo', mkdo is prepended to an existing command to make it work better.
+Frequently I find myself typing a 'mv' command with a destination which doesn't even exist yet. So, this is for me.
 
 mkdo creates any directories mentioned in the command (if they don't already exist).
 
@@ -18,9 +18,9 @@ I have 2 use cases in mind:
 
 e.g. 1
 
-         mkdo mv error.log old/2013-01-01/
+         mkdo mv error.log old/{date}/
 
-This would create the directories "old/2013-01-01/" before running the 'mv' command.
+This would create the directories "old/2013-01-01/" (if current date were 1st Jan 2013) before running the 'mv' command.
 
 
 e.g. 2
@@ -29,6 +29,13 @@ e.g. 2
 
 This would create the directory 'newdir' before starting up gvim. In Linux this even works for console-based editors like vim, but note that in Windows the piping doesn't quite work properly.
 
+The name for mkdo is inspired by 'sudo'. Much like sudo, mkdo is prepended to an existing command to make it work better.
+
+Substitution
+------------
+Currently mkdo only supports 2 'substitutions': {date} (current date, in yyyy-mm-dd format) and {time} (current time, in hh-mm-ss format).
+
+If you'd like to see more substitutions available, please either make a pull request or create an 'issue' on the project page.
 
 Downloads
 ---------
@@ -68,7 +75,6 @@ To do
 -----
 
  - get a better joke
- - Insertion of current date/time using special notation, e.g. mv x.log old-[yyyymmdd]/
  - Add options to ignore certain arguments.
  - Attempt to fix piping for Windows
  - Testing on OSX

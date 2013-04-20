@@ -24,12 +24,13 @@ import (
 	"os/exec"
 	"strings"
 	"syscall"
+	"time"
 )
 
 
 var (
 	//use ldflags (or goxc) to populate main.VERSION during build
-	VERSION	    = "unknown"
+	VERSION	    = "0.0.x"
 	flagSet     = flag.NewFlagSet("mkdo", flag.ExitOnError)
 	verbose     bool
 	interactive bool
@@ -201,6 +202,27 @@ func printVersion() {
 	fmt.Fprintf(os.Stderr, " mkdo version %s\n", VERSION)
 }
 
+func reformatAll(items []string) []string {
+	ret:= []string{}
+	for _, item := range items {
+		ret = append(ret, reformat(item))
+	}
+	return ret
+}
+
+//substitute dates etc
+func reformat(item string) string {
+	ret := item
+	replacements := map[string]string {
+		"{date}" :  time.Now().Format("2006-01-02"),
+		"{time}" :  time.Now().Format("150405"),
+	}
+	for k, v := range replacements {
+		ret = strings.Replace(ret, k, v, -1)
+	}
+	return ret
+}
+
 func Mkdo(call []string) (int, error) {
 	if len(call) < 2 { //no options - invalid
 		printHelp()
@@ -209,8 +231,9 @@ func Mkdo(call []string) (int, error) {
 
 	//no options - just pass all args to cli
 	if strings.Index(call[1], "-") != 0 {
-		mkdoDirs(call[2:])
-		return run(call[1:])
+		formatted := reformatAll(call[1:])
+		mkdoDirs(formatted[1:])
+		return run(formatted)
 	} else {
 		//options - go to parse
 		e := flagSet.Parse(call[1:])
@@ -228,8 +251,9 @@ func Mkdo(call []string) (int, error) {
 			printHelp()
 			return 1, nil
 		} else {
-			mkdoDirs(remainder[1:])
-			return run(remainder)
+			formatted := reformatAll(remainder)
+			mkdoDirs(formatted[1:])
+			return run(formatted)
 		}
 	}
 	return 1, nil
