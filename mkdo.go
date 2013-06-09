@@ -18,7 +18,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io"
 	"log"
 	"os"
 	"os/exec"
@@ -113,29 +112,7 @@ func slashy(arg string) bool {
 	return false
 }
 
-func redirectIOStandard(cmd *exec.Cmd) (*os.File, error) {
-	stdout, err := cmd.StdoutPipe()
-	if err != nil {
-		log.Println(err)
-	}
-	stderr, err := cmd.StderrPipe()
-	if err != nil {
-		log.Println(err)
-	}
-	if verbose {
-		log.Printf("Redirecting output")
-	}
-	go io.Copy(os.Stdout, stdout)
-	go io.Copy(os.Stderr, stderr)
-	//direct. Masked passwords work OK!
-	cmd.Stdin = os.Stdin
-	return nil, err
-}
 
-func redirectIO(cmd *exec.Cmd) (*os.File, error) {
-	f, err := redirectIOStandard(cmd)
-	return f, err
-}
 func run(args []string) (int, error) {
 	p, err := exec.LookPath(args[0])
 	if err != nil {
@@ -148,13 +125,10 @@ func run(args []string) (int, error) {
 			log.Printf("Running cmd: %s", args)
 		}
 
-		f, err := redirectIO(cmd)
-		if err != nil {
-			log.Printf("Error redirecting IO: %s", err)
-		}
-		if f != nil {
-			defer f.Close()
-		}
+		// redirect IO
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		cmd.Stdin = os.Stdin
 
 		err = cmd.Start()
 		if err != nil {

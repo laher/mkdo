@@ -54,6 +54,11 @@ With apologies, mkdo comes with a lame rip-off of the [xkcd sudo joke](http://xk
  - child: *mkdo* put that cake in my lunchbox/
  - parent: okay
 
+Thanks
+------
+
+Thanks to [schettino72](https://github.com/schettino72) for simplifying & improving the piping.
+
 License
 -------
 
